@@ -11,13 +11,18 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/acloudyh/springCloud-config.git #github上仓库地址
+          uri: https://github.com/520xiaowang/cloud-config.git #github上仓库地址
           search-paths:
             # 搜索目录
-            - springcoud-config
+            - cloud-config
       #读取分支
-      label: master
-
+      label: dev
+# rabbitmq相关配置 15672是web管理界面的端口; 5672 是MQ访问的端口
+  rabbitmq:
+    host: 192.168.192.192
+    port: 5672
+    username: admin
+    password: admin
 #服务注册到Eureka地址
 eureka:
   client:

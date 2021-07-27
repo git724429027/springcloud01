@@ -38,9 +38,9 @@ spring:
       routes:
         - id: payment_routh
           #          uri: http://localhost:8001
-          uri: lb://cloud-payment-service # 匹配后提供服务的路由地址;
+          uri: lb://CLOUD-ORDER-SERVICE # 匹配后提供服务的路由地址;
           predicates:
-            - Path=/payment/get/**
+            - Path=/consumer/payment/get/**
         - id: payment_routh2
           #          uri: http://localhost:8001
           uri: lb://cloud-payment-service

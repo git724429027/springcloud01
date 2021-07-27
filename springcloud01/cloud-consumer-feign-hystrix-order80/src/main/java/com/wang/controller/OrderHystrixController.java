@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+
+
 /**
  * @author xiaowang
  * @time 2020-12-15 11:40
@@ -19,24 +21,25 @@ import javax.annotation.Resource;
 @RestController
 @Slf4j
 @RequestMapping("/consumer/payment")
-// @DefaultProperties(defaultFallback = "payment_Global_FallbackMethod")
+@DefaultProperties(defaultFallback = "payment_Global_FallbackMethod")
 public class OrderHystrixController {
     @Resource
     private PaymentHystrixService paymentHystrixService;
 
     @GetMapping("/hystrix/ok/{id}")
-    // @HystrixCommand
+    @HystrixCommand
     public String paymentInfo_OK(@PathVariable("id") Integer id){
+        int i=1/0;
         return paymentHystrixService.paymentInfo_OK(id);
     }
 
-    /*@HystrixCommand(fallbackMethod = "paymentInfo_TimeOutHandler",commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "1500")
-    })*/
+      @HystrixCommand(fallbackMethod = "paymentInfo_TimeOutHandler",commandProperties = {
+              @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "1500")
+      })
     // @HystrixCommand
     @GetMapping("/hystrix/timeOut/{id}")
     public String paymentInfo_timeOut(@PathVariable("id") Integer id){
-        int i=10/0;
+        // int i=10/0;
         return paymentHystrixService.paymentInfo_timeOut(id);
     }
 
@@ -44,8 +47,11 @@ public class OrderHystrixController {
         return "我是消费者：运行出错啦！  "+"paymentInfo_TimeOutHandler,id:"+id+"\t"+"┭┮﹏┭┮";
     }
 
-    public String payment_Global_FallbackMethod(Integer id){
-        return "我是默认方法：运行出错啦！  "+"payment_Global_FallbackMethod,id:"+id+"\t"+"┭┮﹏┭┮";
+    public String payment_Global_FallbackMethod(){
+        return "我是默认方法：运行出错啦！  "+"payment_Global_FallbackMethod,id:"+"\t"+"┭┮﹏┭┮";
     }
 
 }
+
+
+

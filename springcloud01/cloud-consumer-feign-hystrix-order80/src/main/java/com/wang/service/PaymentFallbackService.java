@@ -6,15 +6,15 @@ import org.springframework.stereotype.Component;
  * @author xiaowang
  * @time 2020-12-15 14:17
  **/
-// @Component
+@Component
 public class PaymentFallbackService implements PaymentHystrixService{
     @Override
     public String paymentInfo_OK(Integer id) {
-        return "paymentInfo_OK*****";
+        return "PaymentFallbackService + paymentInfo_OK*****";
     }
 
     @Override
     public String paymentInfo_timeOut(Integer id) {
-        return "paymentInfo_timeOut*****";
+        return "PaymentFallbackService + paymentInfo_timeOut*****";
     }
 }
